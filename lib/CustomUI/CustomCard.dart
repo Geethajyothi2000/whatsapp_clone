@@ -1,19 +1,22 @@
 // CustomUI/custom_card.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:whatsapp_clone/Model/ChatModel.dart';
 import 'package:whatsapp_clone/Screens/Individualpage.dart';
-import 'package:whatsapp_clone/model/chatModel.dart';
+
 
 class CustomCard extends StatelessWidget {
-  final ChatModel chatModel;
 
-  const CustomCard({Key? key, required this.chatModel}) : super(key: key);
+  const CustomCard({Key? key, required this.chatModel,required this.sourchat}) : super(key: key);
+   final ChatModel chatModel;
+  final ChatModel   sourchat;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (contex) => IndividualPage(chatModel: chatModel,)));
+        Navigator.push(context, MaterialPageRoute(builder: (contex) => IndividualPage(
+          chatModel: chatModel,sourchat: sourchat,)));
         print("Card tapped");
       },
       child: Column(

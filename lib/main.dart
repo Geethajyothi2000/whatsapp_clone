@@ -1,9 +1,16 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whatsapp_clone/Screens/CameraScreen.dart';
 import 'package:whatsapp_clone/Screens/Homescreen.dart';
+import 'package:whatsapp_clone/Screens/LoginScreen.dart';
 
-void main() async {
+List<CameraDescription>? cameras; // Define cameras globally
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  cameras = await availableCameras();
   runApp(MyApp());
 }
 
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
           color: Color(0xff075E54), // Same dark green color for the app bar
         ),
       ),
-      home: Homescreen(),
+      home: LoginScreen(key: Key('loginScreen')), // Use a unique key if needed
     );
   }
 }

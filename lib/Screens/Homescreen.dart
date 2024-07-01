@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Model/ChatModel.dart';
+import 'package:whatsapp_clone/pages/CameraPage.dart';
 import 'package:whatsapp_clone/pages/ChatPage.dart';
 
 class Homescreen extends StatefulWidget {
-  Homescreen({Key? key}) : super(key: key);
+  Homescreen({Key? key, required this.chatmodels, required this.sourchat}) : super(key: key);
+  final List<ChatModel> chatmodels;
+  final ChatModel   sourchat;
 
   @override
   _HomescreenState createState() => _HomescreenState();
@@ -31,9 +35,9 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
         actions: [
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
           PopupMenuButton<String>(
-          onSelected: (value) {
-            print(value);
-          },
+            onSelected: (value) {
+              print(value);
+            },
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
@@ -74,19 +78,12 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
       body: TabBarView(
         controller: _controller,
         children: [
-          Center(child: Text("Camera")),
-         ChatPage(),
+          CameraPage(),
+          ChatPage(chatmodels: widget.chatmodels,sourchat: widget.sourchat,), // Pass the chatmodels list to ChatPage
           Center(child: Text("Status")),
           Center(child: Text("Calls")),
         ],
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Homescreen(),
-  ));
 }
