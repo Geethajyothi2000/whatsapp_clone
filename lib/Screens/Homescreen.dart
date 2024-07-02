@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Model/ChatModel.dart';
 import 'package:whatsapp_clone/pages/CameraPage.dart';
 import 'package:whatsapp_clone/pages/ChatPage.dart';
+import 'package:whatsapp_clone/pages/StatusPage.dart';
 
 class Homescreen extends StatefulWidget {
   Homescreen({Key? key, required this.chatmodels, required this.sourchat}) : super(key: key);
@@ -80,7 +81,8 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
         children: [
           CameraPage(),
           ChatPage(chatmodels: widget.chatmodels,sourchat: widget.sourchat,), // Pass the chatmodels list to ChatPage
-          Center(child: Text("Status")),
+         StatusPage(key: Key('status_page')),
+
           Center(child: Text("Calls")),
         ],
       ),

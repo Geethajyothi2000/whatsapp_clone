@@ -6,8 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:whatsapp_clone/Screens/CameraViewPage.dart';
 import 'package:whatsapp_clone/Screens/VideoView.dart';
-
-List<CameraDescription> cameras = [];
+import 'package:whatsapp_clone/main.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -27,7 +26,9 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
-    initializeCamera();
+    if (cameras.isNotEmpty) {
+      initializeCamera();
+    }
   }
 
   void initializeCamera() {
@@ -38,11 +39,20 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void dispose() {
     super.dispose();
-    _cameraController.dispose();
+    if (cameras.isNotEmpty) {
+      _cameraController.dispose();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (cameras.isEmpty) {
+      return Scaffold(
+        body: Center(
+          child: Text('No cameras available'),
+        ),
+      );
+    }
     return Scaffold(
       body: Stack(
         children: [
